@@ -95,6 +95,10 @@ NOTE: `.tfstate` files are created separately for each collection of infrastruct
 under the [STORAGE_ACCOUNT]/[CONTAINER]/[KEY], for example for our basic_virtual_machine
 the configuration is tracked in `az://tfstate5063/tfstate/linux-vm.tfstate`
 
+## Add new users to Azure Subscription 
+
+> https://portal.azure.com --> 2. Subscriptions (Microsoft Azure Sponsorship)  --> 3. Access Control (IAM) --> Role Assignments --> Add --> Add Role Assignment (Contributor) --> +Select Members --> Add email address --> Review + Assign
+
 
 ## References
 
