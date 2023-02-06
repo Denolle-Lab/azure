@@ -19,9 +19,10 @@ terraform apply
 
 ## Use
 
-Step 1) Create temporary access token
+Step 1) Create temporary access token (full permissions)
 ```
-#end=`date -u -d "6 hours" '+%Y-%m-%dT%H:%MZ'`
+# NOTE: 7 day max on these tokens
+#end=`date -u -d "7 days" '+%Y-%m-%dT%H:%MZ'`
 
 az storage container generate-sas \
     --account-name snowmelt\
@@ -32,6 +33,19 @@ az storage container generate-sas \
     --as-user
 ```
 
+Read-only token (note changed permissions to just 'rl')
+https://learn.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-generate-sas
+```
+az storage container generate-sas \
+    --account-name snowmelt\
+    --name snowmelt \
+    --permissions rl \
+    --expiry 2023-02-13T19:15Z \
+    --auth-mode login \
+    --as-user
+```
+
+Step 2) Move files around
 ```
 export export AZURE_STORAGE_SAS_TOKEN="se=2023-02-09T20...."
 az storage blob list -c snowmelt --account-name snowmelt --output table
@@ -39,8 +53,8 @@ az storage blob list -c snowmelt --account-name snowmelt --output table
 az storage blob upload \
     --account-name snowmelt \
     --container-name snowmelt \
-    --name hello.txt \
-    --file hello.txt \
+    --name hello2.txt \
+    --file /tmp/hello.txt \
     --output table
 
 az storage blob download \
