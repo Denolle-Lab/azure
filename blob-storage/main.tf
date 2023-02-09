@@ -38,7 +38,6 @@ resource "azurerm_storage_account" "incubator2023" {
   name                     = "snowmelt"
   resource_group_name      = azurerm_resource_group.incubator2023.name
   location                 = azurerm_resource_group.incubator2023.location
-  allow_blob_public_access = true
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
